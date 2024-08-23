@@ -1,5 +1,10 @@
 import os
 
+def main():
+    os.makedirs('main_app/migrations')
+    create_migration_for_application("main_app", '0001', 'start', [])
+    create_migration_for_application("main_app", '0002', 'another_one', [('main_app', '0001_start')])
+    create_migration_for_application("main_app", '0003', 'another_one_third', [('main_app', '0002_another_one')])
 
 def create_migration_for_application(
         app: str, 
@@ -23,7 +28,5 @@ def create_migration_for_application(
         file.write(migration_content)
 
 
-os.makedirs('main_app/migrations')
-create_migration_for_application("main_app", '0001', 'start', [])
-create_migration_for_application("main_app", '0002', 'another_one', [('main_app', '0001_start')])
-create_migration_for_application("main_app", '0003', 'another_one_third', [('main_app', '0002_another_one_jeb_sie')])
+if __name__ == '__main__':
+    main()
